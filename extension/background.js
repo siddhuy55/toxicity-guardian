@@ -2,7 +2,7 @@
 console.log("🔥 BACKGROUND SCRIPT IS ALIVE & CONNECTED TO CLOUD!");
 
 // ✅ UPDATED: Pointing to your live Render server
-const API_URL = "https://toxicity-guardian-api.onrender.com"; 
+const API_URL = "https://toxicity-guardian-api.onrender.com/analyze";
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "analyze_text") {
