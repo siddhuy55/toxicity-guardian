@@ -1,13 +1,15 @@
-console.log("🔥 BACKGROUND SCRIPT IS ALIVE!");
-// Handles communication between Content Script and Backend API
-const API_URL = "http://localhost:8000/analyze";
+// background.js - Cloud Version ☁️
+console.log("🔥 BACKGROUND SCRIPT IS ALIVE & CONNECTED TO CLOUD!");
+
+// ✅ UPDATED: Pointing to your live Render server
+const API_URL = "https://toxicity-guardian-api.onrender.com"; 
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "analyze_text") {
     
-    // Fetch user settings for sensitivity before calling API
+    // Fetch user settings (default threshold 60%)
     chrome.storage.local.get(['sensitivity'], (result) => {
-        const threshold = (result.sensitivity || 70) / 100;
+        const threshold = (result.sensitivity || 60) / 100;
 
         fetch(API_URL, {
           method: "POST",
@@ -17,10 +19,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
               threshold: threshold
           })
         })
-        .then(response => response.json())
-        .then(data => sendResponse({ success: true, data: data }))
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Server Error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("✅ Cloud Analysis Result:", data);
+            sendResponse({ success: true, data: data });
+        })
         .catch(error => {
-            console.error("API Error:", error);
+            console.error("❌ Connection Failed:", error);
+            // If server is waking up (Spinning up), it might fail once. That's okay.
             sendResponse({ success: false, error: error.message });
         });
     });

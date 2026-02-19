@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Toxicity Guardian</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>🛡️ Guardian</h1>
+      <div class="status valid">● Active</div>
+    </header>
+
+    <div class="card">
+      <div class="stat-row">
+        <div>
+            <span class="label">Blocked</span>
+            <span class="value" id="blocked-count">0</span>
+        </div>
+        <div>
+            <span class="label">Sensitivity</span>
+            <span class="value" id="sens-display">70%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <label>Detection Sensitivity</label>
+      <input type="range" id="sensitivity" min="10" max="95" value="70">
+      
+      <div class="toggles">
+        <div class="toggle-item">
+            <span>Hate Speech</span>
+            <input type="checkbox" checked disabled> </div>
+      </div>
+    </div>
+
+    <button id="save-btn">Save Settings</button>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
