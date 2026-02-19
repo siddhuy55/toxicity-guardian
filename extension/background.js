@@ -1,6 +1,9 @@
 // background.js - Cloud Version ☁️
 console.log("🔥 BACKGROUND SCRIPT IS ALIVE & CONNECTED TO CLOUD!");
 
+// 🟢 TO RUN LOCALLY (ON YOUR LAPTOP): Uncomment the line below
+// const API_URL = "http://127.0.0.1:8000/analyze";
+
 // ✅ UPDATED: Pointing to your live Render server
 const API_URL = "https://toxicity-guardian-api.onrender.com/analyze";
 
